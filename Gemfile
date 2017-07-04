@@ -7,6 +7,7 @@ gem 'mechanize', '~> 2.7.5'
 gem 'sinatra', '~> 2.0.0'
 gem 'sinatra-contrib'
 gem 'thin'
+gem 'google-api-client'
 
 group :test do
   gem 'capybara'
