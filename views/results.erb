@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-xs-12"><h2>Job listings for Denver</h2></div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <table id="job-listings" class="table-responsive">
+      <thead>
+      <tr>
+        <th>Job title</th>
+        <th>Company</th>
+        <th>Posted on</th>
+      </tr>
+
+      <% job_listings.each do |job| %>
+          <tr>
+            <td><a href="<%= job.link %>"><%= job.title %></a></td>
+            <td><%= job.company_name %></td>
+            <td><%= job.posted_on %></td>
+          </tr>
+      <% end %>
+      </thead>
+    </table>
+  </div>
+</div>
