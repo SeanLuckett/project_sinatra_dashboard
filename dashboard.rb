@@ -16,16 +16,8 @@ class ScraperDashboard < Sinatra::Application
   set :views, File.expand_path('../views', __FILE__)
 
   get '/' do
+    session.clear
     erb :index
-  end
-
-  get '/results' do
-    scraper = JobScraper.new(
-      search_terms: session[:search_terms],
-      writer: SheetsJobStorage
-    )
-
-    erb :results, locals: { job_listings: scraper.listings }
   end
 
   post '/save-job-listings' do
@@ -34,8 +26,15 @@ class ScraperDashboard < Sinatra::Application
 
   post '/search-jobs' do
     url_search_terms = params[:search_terms].gsub(/\s+/, '_')
-    session[:search_terms] = url_search_terms
 
-    redirect to('/results')
+    scraper = JobScraper.new(
+      search_terms: url_search_terms,
+      writer: SheetsJobStorage
+    )
+
+    erb :results, locals: {
+      job_listings: scraper.listings,
+      search_terms: params[:search_terms]
+    }
   end
 end
