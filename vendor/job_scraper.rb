@@ -17,19 +17,7 @@ class JobScraper
 
   def parse_jobs
     job_listings.each_with_index.map do |job, i|
-      position_info = job.css("a#position#{i}").first
-      title = position_info['title']
-      link = position_info['href']
-      company_id, job_id = parse_from_url(link)
-
-      company_name = job.css("a#company#{i}").first.children.first.text
-      location = extract_location(job)
-
-      date = extract_posting_date(job)
-
-
-      JobListing.new(title, company_name, location,
-                     link, company_id, job_id, date)
+      parse_job(job, i)
     end
   end
 
@@ -65,6 +53,22 @@ class JobScraper
     job_id = URI.unescape(path_parts.last)
 
     [company_id, job_id]
+  end
+
+  def parse_job(job, index)
+    position_info = job.css("a#position#{index}").first
+    title = position_info['title']
+    link = position_info['href']
+    company_id, job_id = parse_from_url(link)
+
+    company_name = job.css("a#company#{index}").first.children.first.text
+    location = extract_location(job)
+
+    date = extract_posting_date(job)
+
+
+    JobListing.new(title, company_name, location,
+                   link, company_id, job_id, date)
   end
 
   def write_data(job_data_array)
