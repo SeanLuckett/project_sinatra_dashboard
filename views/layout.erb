@@ -10,25 +10,20 @@
   <div class="container-fluid">
     <header>
       <nav class="navbar navbar-default">
-        <div class="navbar-header">
-          <h1>Sean's job hunter</h1>
+        <div class="container-fluid">
+          <ul class="nav nav-pills navbar-left">
+            <li class="active" role="presentation">
+              <a class="btn btn-default btn-primary" href="/" role="button">New search</a>
+            </li>
+          </ul>
+          <!--<div class="navbar-header">-->
+            <p class="navbar-text"><strong>Sean's job hunter</strong></p>
+          <!--</div>-->
+
         </div>
       </nav>
     </header>
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="button-group btn-group-justified" role="group">
-          <a class="btn btn-default btn-primary" href="/" role="button">
-            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-            Search
-          </a>
-          <a class="btn btn-default btn-success disabled" href="/results" role="button">
-            <span class="glyphicon glyphicon-list-alt"></span>
-            Results
-          </a>
-        </div>
-      </div>
-    </div>
+
     <div class="row">
       <section id="main" class="col-xs-12">
         <%= yield %>
