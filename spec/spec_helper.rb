@@ -1,10 +1,19 @@
 require 'rack/test'
 require 'rspec'
 require 'capybara/rspec'
+require 'webmock/rspec'
 
 ENV['RACK_ENV'] = 'test'
 
 require File.expand_path '../../dashboard.rb', __FILE__
+
+# Monkeypatch FakeWeb so it works with ruby 2.4
+module FakeWeb
+  class StubSocket
+    def close
+    end
+  end
+end
 
 module RSpecMixin
   include Rack::Test::Methods

@@ -11,6 +11,7 @@ gem 'google-api-client'
 
 group :test do
   gem 'capybara'
+  gem 'fakeweb', '~> 1.3.0'
   gem 'rack-test', require: 'rack/test'
   gem 'rspec', '~> 3.6.0'
 end

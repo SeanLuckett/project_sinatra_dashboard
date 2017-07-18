@@ -10,9 +10,13 @@ class JobScraper
   attr_reader :listings
 
   def initialize(scraper: Mechanize.new, search_terms:, writer:)
-    @page = scraper.get "#{DICE_SEARCH_URL_BEGIN}#{search_terms}#{DICE_SEARCH_URL_END}"
+    @page = scraper.get(
+      "#{DICE_SEARCH_URL_BEGIN}#{search_terms.gsub(/\s+/, '_')}" \
+      "#{DICE_SEARCH_URL_END}"
+    )
+
     @listings = parse_jobs
-    @writer = writer
+    @Writer = writer
   end
 
   def parse_jobs
@@ -72,7 +76,7 @@ class JobScraper
   end
 
   def write_data(job_data_array)
-    @writer.save_job GOOGLE_SHEET_NAME, job_data_array
+    @Writer.save_job GOOGLE_SHEET_NAME, job_data_array
   end
 end
 
