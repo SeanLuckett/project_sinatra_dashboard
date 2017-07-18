@@ -25,10 +25,8 @@ class ScraperDashboard < Sinatra::Application
   end
 
   post '/search-jobs' do
-    url_search_terms = params[:search_terms].gsub(/\s+/, '_')
-
     scraper = JobScraper.new(
-      search_terms: url_search_terms,
+      search_terms: params[:search_terms],
       writer: SheetsJobStorage
     )
 

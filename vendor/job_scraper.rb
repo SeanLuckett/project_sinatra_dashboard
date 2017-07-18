@@ -25,6 +25,10 @@ class JobScraper
     end
   end
 
+  def save_job(job_data)
+    write_data job_data
+  end
+
   private
 
   def job_listings
