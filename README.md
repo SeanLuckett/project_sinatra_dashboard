@@ -5,7 +5,7 @@ let's go for an apartment hunt!
 ### Dev goals not included in assignment
 * ~~Create API using Google Apps Script~~
 * ~~Use that API to write job search results to Google Sheet~~
-* Implement http basic auth
+* ~~Implement http basic auth~~
 * Deploy to (likely) Heroku
 * Incorporate job searches from other sites (ie [Indeed](https://www.indeed.com/) or [Hired](https://hired.com/)--also try github jobs and built in colorado)
 * Add searchable data store to store results and present them for me to save or discard
