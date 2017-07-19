@@ -11,9 +11,16 @@ class ScraperDashboard < Sinatra::Application
 
   configure :development do
     register Sinatra::Reloader
+
+    require 'envyable'
+    Envyable.load('config/env.yml')
   end
 
   set :views, File.expand_path('../views', __FILE__)
+
+  use Rack::Auth::Basic, 'Restricted Area' do |username, password|
+    username == ENV['AUTH_USERNAME'] && password == ENV['AUTH_PASSWORD']
+  end
 
   get '/' do
     session.clear

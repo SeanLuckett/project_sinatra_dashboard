@@ -9,6 +9,10 @@ gem 'sinatra', '~> 2.0.0'
 gem 'sinatra-contrib'
 gem 'thin'
 
+group :development do
+  gem 'envyable', '~> 1.2.0'
+end
+
 group :test do
   gem 'capybara'
 
