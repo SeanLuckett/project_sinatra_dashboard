@@ -67,12 +67,4 @@ RSpec.describe JobScraper do
       end
     end
   end
-
-  describe 'writing data' do
-    it 'saves a job' do
-      job_dummy = double('Job Data as Array')
-      expect(sheets_writer).to receive(:save_job).with(JobScraper::GOOGLE_SHEET_NAME, job_dummy)
-      scraper.save_job(job_dummy)
-    end
-  end
 end

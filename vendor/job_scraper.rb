@@ -9,6 +9,7 @@ class JobScraper
 
   attr_reader :listings
 
+  # TODO: put the location stuff back into the url constant--it's always going to be Denver
   def initialize(scraper: Mechanize.new, search_terms:, city:, state:, writer:)
     @page = scraper.get(build_url(search_terms, city, state))
 
@@ -20,10 +21,6 @@ class JobScraper
     job_listings.each_with_index.map do |job, i|
       parse_job(job, i)
     end
-  end
-
-  def save_job(job_data)
-    write_data job_data
   end
 
   private
@@ -81,10 +78,6 @@ class JobScraper
 
     JobListing.new(title, company_name, location,
                    link, company_id, job_id, date)
-  end
-
-  def write_data(job_data_array)
-    @Writer.save_job GOOGLE_SHEET_NAME, job_data_array
   end
 end
 
