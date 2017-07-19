@@ -7,7 +7,7 @@ require_relative 'vendor/google/sheets_job_storage'
 class ScraperDashboard < Sinatra::Application
   enable :sessions
 
-# Avoid warning: http://stackoverflow.com/a/18047653/5113832
+  # Avoid warning: http://stackoverflow.com/a/18047653/5113832
   set :session_secret, '*&(^B234'
 
   configure :development do
@@ -30,11 +30,16 @@ class ScraperDashboard < Sinatra::Application
     erb :index
   end
 
-  post '/save-job-listings' do
-    # TODO: implement
+  post '/save-job' do
+    job_data = JSON.parse(params[:job_data])
+    SheetsJobStorage.save_job(
+      JobScraper::GOOGLE_SHEET_NAME, job_data
+    )
+
+    redirect back
   end
 
-  post '/search-jobs' do
+  get '/search-jobs' do
     user_location = JSON.parse(session[:user_loc])
 
     scraper = JobScraper.new(

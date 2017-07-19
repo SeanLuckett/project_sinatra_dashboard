@@ -16,6 +16,14 @@
             <td><a href="<%= job.link %>"><%= job.title %></a></td>
             <td><%= job.company_name %></td>
             <td><%= job.posted_on %></td>
+            <td>
+              <form action="/save-job" method="post" class="form-inline">
+                <div class="form-group">
+                  <input type="hidden" name="job_data" value='<%= job.to_a %>'>
+                  <button type="submit" class="btn btn-default btn-primary">Save</button>
+                </div>
+              </form>
+            </td>
           </tr>
       <% end %>
       </thead>
