@@ -4,7 +4,6 @@ ruby '2.4.1'
 
 gem 'activesupport', '~> 5.0.0'
 gem 'google-api-client'
-gem 'httparty', '~> 0.15.5'
 gem 'mechanize', '~> 2.7.5'
 gem 'sinatra', '~> 2.0.0'
 gem 'sinatra-contrib'

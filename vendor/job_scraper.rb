@@ -3,18 +3,19 @@ require 'active_support/time'
 
 class JobScraper
   DICE_SEARCH_URL_BEGIN = 'https://www.dice.com/jobs/jtype-Full%20Time-q-'.freeze
-  DICE_SEARCH_URL_END = '-radius-10-jobs'.freeze
+  DICE_SEARCH_URL_END = '-l-Denver%2C_CO-radius-10-jobs'.freeze
   DICE_JOB_CSS = '.complete-serp-result-div'.freeze
   GOOGLE_SHEET_NAME = 'Dice'
 
   attr_reader :listings
 
-  # TODO: put the location stuff back into the url constant--it's always going to be Denver
-  def initialize(scraper: Mechanize.new, search_terms:, city:, state:, writer:)
-    @page = scraper.get(build_url(search_terms, city, state))
+  def initialize(scraper: Mechanize.new, search_terms:)
+    @page = scraper.get(
+      "#{DICE_SEARCH_URL_BEGIN}#{search_terms.gsub(/\s+/, '_')}" \
+      "#{DICE_SEARCH_URL_END}"
+    )
 
     @listings = parse_jobs
-    @Writer = writer
   end
 
   def parse_jobs
@@ -24,13 +25,6 @@ class JobScraper
   end
 
   private
-
-  def build_url(terms, city, state)
-    location = [city, state].join('%2C_')
-
-    "#{DICE_SEARCH_URL_BEGIN}#{terms.gsub(/\s+/, '_')}-l-" \
-      "#{location}#{DICE_SEARCH_URL_END}"
-  end
 
   def job_listings
     @page.css DICE_JOB_CSS

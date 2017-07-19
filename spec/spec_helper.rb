@@ -13,8 +13,6 @@ module RSpecMixin
   def app() Sinatra::Application end
 end
 
-require_relative '../lib/locator'
-
 RSpec.configure do |config|
   config.include RSpecMixin
 

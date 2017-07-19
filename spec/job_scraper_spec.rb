@@ -2,16 +2,10 @@ require 'open-uri'
 require 'fakeweb'
 
 RSpec.describe JobScraper do
-  let(:sheets_writer) { spy('Google Sheets Writer') }
-  let(:agent) { Mechanize.new }
   let(:terms) { 'herp derp' }
   let(:scraper) do
     JobScraper.new(
-      scraper: agent,
-      search_terms: terms,
-      city: 'Denver',
-      state: 'CO',
-      writer: sheets_writer
+      search_terms: terms
     )
   end
 
@@ -19,7 +13,7 @@ RSpec.describe JobScraper do
     test_file_path = File.join(File.dirname(__FILE__), 'assets/dice_denver_jobs.html')
     stream = open(test_file_path, &:read)
     url_search_terms = 'herp_derp'
-    url = "#{JobScraper::DICE_SEARCH_URL_BEGIN}#{url_search_terms}-l-Denver%2C_CO#{JobScraper::DICE_SEARCH_URL_END}"
+    url = "#{JobScraper::DICE_SEARCH_URL_BEGIN}#{url_search_terms}#{JobScraper::DICE_SEARCH_URL_END}"
 
     FakeWeb.register_uri(:get,
                          url,
