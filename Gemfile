@@ -11,6 +11,7 @@ gem 'thin'
 
 group :development do
   gem 'envyable', '~> 1.2.0'
+  gem 'pry', '~> 0.10.4'
 end
 
 group :test do
